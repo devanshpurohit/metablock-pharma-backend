@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { cloudinaryPlugin } from '../utils/mongooseCloudinaryPlugin.js';
 
 const productSchema = new mongoose.Schema(
   {
@@ -20,5 +21,7 @@ const productSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+productSchema.plugin(cloudinaryPlugin);
 
 export default mongoose.model('Product', productSchema);

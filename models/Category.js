@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { cloudinaryPlugin } from '../utils/mongooseCloudinaryPlugin.js';
 
 const categorySchema = new mongoose.Schema(
   {
@@ -9,5 +10,7 @@ const categorySchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+categorySchema.plugin(cloudinaryPlugin);
 
 export default mongoose.model('Category', categorySchema);
