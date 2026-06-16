@@ -35,7 +35,14 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.length === 0) {
+    if (!origin) return callback(null, true);
+    
+    const isLocal = origin.startsWith('http://localhost') || origin.startsWith('http://127.0.0.1');
+    const isVercel = origin.endsWith('.vercel.app');
+    const isRender = origin.endsWith('.onrender.com');
+    const isExplicitlyAllowed = allowedOrigins.some(url => url === origin || url.startsWith(origin));
+
+    if (isLocal || isVercel || isRender || isExplicitlyAllowed) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
