@@ -4,6 +4,10 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
+import { cloudinaryPlugin } from './utils/mongooseCloudinaryPlugin.js';
+
+mongoose.plugin(cloudinaryPlugin);
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
